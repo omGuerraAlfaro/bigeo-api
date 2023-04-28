@@ -25,10 +25,8 @@ export class Users {
   lastname: string;
 
   @Column()
-  userRole: string;
- 
+  userRole: string; 
 }
-
 
 @EntityRepository(Users)
 export class UsersRepository extends Repository<Users> {}

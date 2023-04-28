@@ -10,9 +10,11 @@ export class UsersService {
     @InjectRepository(Users)
     private readonly usersRepository: Repository<Users>,
   ) {}
+  //agregar usuario  
   async addUser(user: Users): Promise<Users> {
     return this.usersRepository.save(user);
   }
+  //buscar usuario por username
   async findOne(username: string): Promise<any> {
     try {
       const user = await this.usersRepository.findOne({
@@ -27,6 +29,7 @@ export class UsersService {
       });
     }
   }
+  //Login, buscar usuario por username y password
   async login(username: string, password: string): Promise<any> {
     try {
       const user = await this.usersRepository.findOne({
@@ -39,6 +42,7 @@ export class UsersService {
       });
     }
   }
+  //buscar todos los usuarios
   async findAll(): Promise<any> {
     const users = await this.usersRepository.find();
     return users;
