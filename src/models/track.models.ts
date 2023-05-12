@@ -1,4 +1,4 @@
-import { Form, FormDamage, FormSprinkler } from 'src/models/form.models';
+import { Form, FormDamage, FormSprinkler } from 'src/models/form.entity';
 import {
   Column,
   Entity,

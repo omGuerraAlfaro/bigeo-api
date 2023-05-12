@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { UsersModule } from './components/user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Users } from './models/user.model';
+import { Form } from './models/form.entity';
+import { Geometry } from './models/track.models';
 
 
 @Module({
@@ -16,7 +18,7 @@ import { Users } from './models/user.model';
       username: 'duoc2023team1',
       password: 'duoc2023',
       database: 'Aplicacion',
-      entities: [Users],
+      entities: [Users, Form, Geometry],
     }),
   ],
   controllers: [AppController],

@@ -1,4 +1,4 @@
-import { Form } from 'src/models/form.models';
+import { Form } from 'src/models/form.entity';
 import { Track } from 'src/models/track.models';
 import {
     Column,
