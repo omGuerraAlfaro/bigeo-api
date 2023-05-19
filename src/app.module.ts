@@ -4,8 +4,11 @@ import { AppService } from './app.service';
 import { UsersModule } from './components/user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Users } from './models/user.model';
-import { Form } from './models/form.entity';
-import { Geometry } from './models/track.models';
+import { Form, FormCompaction, FormCount, FormDamage,
+   FormDiseases, FormFauna, FormGirdling, FormHumidity, 
+   FormPlague, FormSprinkler } from './models/form.models';
+import { Geometry } from './models/geometry.models';
+import { Track } from './models/track.models';
 
 
 @Module({
@@ -18,7 +21,9 @@ import { Geometry } from './models/track.models';
       username: 'duoc2023team1',
       password: 'duoc2023',
       database: 'Aplicacion',
-      entities: [Users, Form, Geometry],
+      entities: [Users, Form, FormSprinkler,FormDamage, FormHumidity,
+        FormCompaction,FormFauna, FormCount, FormDiseases, FormGirdling,
+        FormPlague, Geometry, Track],
     }),
   ],
   controllers: [AppController],

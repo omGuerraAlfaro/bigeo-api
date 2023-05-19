@@ -1,11 +1,11 @@
-import { Form } from 'src/models/form.entity';
+import { Form } from 'src/models/form.models';
 import { Track } from 'src/models/track.models';
 import {
     Column,
     Entity,
     JoinColumn,
-    //ManyToOne,
-    //OneToMany,
+    ManyToOne,
+    OneToMany,
     OneToOne,
     //PrimaryColumn,
     PrimaryGeneratedColumn,
@@ -20,11 +20,11 @@ export class Geometry {
     @Column('float', { array: true })
     coordinates: number[];
 
+    @ManyToOne(() => Track, (track) => track)
+    @JoinColumn()
+    track: Track;
+
     @OneToOne(() => Form, { cascade: true, eager: true })
     @JoinColumn()
     form: Form[];
-
-    @OneToOne(() => Track, { cascade: true, eager: true })
-    @JoinColumn()
-    track: Track[];
 }
