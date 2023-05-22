@@ -18,7 +18,8 @@ export class FormService {
     try {
       const form = await this.formRepository.findOne({
         where: { form_id },
-      });
+        relations: {geometry: true, properties: {formCompaction : true, formCount : true, formDamage : true, formFauna : true, formHumidity : true, formSprinkler : true}}}
+      );
       if (!form) {
         throw new NotFoundException(`Form with ID ${form_id} not found`);
       }

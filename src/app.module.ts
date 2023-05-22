@@ -1,19 +1,22 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './components/user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Users } from './models/user.model';
-import { Form, FormCompaction, FormCount, FormDamage,
-   FormDiseases, FormFauna, FormGirdling, FormHumidity, 
-   FormPlague, FormSprinkler } from './models/form.models';
+import {
+  Form, FormCompaction, FormCount, FormDamage,
+  FormDiseases, FormFauna, FormGirdling, FormHumidity,
+  FormPlague, FormSprinkler, Properties
+} from './models/form.models';
 import { Geometry } from './models/geometry.models';
 import { Track } from './models/track.models';
+import { FormModule, UsersModule } from './components'
 
 
 @Module({
   imports: [
     UsersModule,
+    FormModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: '18.116.150.135',
@@ -21,12 +24,12 @@ import { Track } from './models/track.models';
       username: 'duoc2023team1',
       password: 'duoc2023',
       database: 'Aplicacion',
-      entities: [Users, Form, FormSprinkler,FormDamage, FormHumidity,
-        FormCompaction,FormFauna, FormCount, FormDiseases, FormGirdling,
-        FormPlague, Geometry, Track],
+      entities: [Users, Form, FormSprinkler, FormDamage, FormHumidity,
+        FormCompaction, FormFauna, FormCount, FormDiseases, FormGirdling,
+        FormPlague, Geometry, Track, Properties],
     }),
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

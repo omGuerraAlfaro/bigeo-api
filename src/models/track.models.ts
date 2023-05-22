@@ -9,6 +9,7 @@ import {
   PrimaryColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Geometry } from './geometry.models';
 
 @Entity({ name: 'track' })
 export class Track {
@@ -32,15 +33,4 @@ export class Track {
   distance: number;
   @Column({ array: true })
   rawData: string;
-}
-@Entity({ name: 'geometry' })
-export class Geometry {
-  @PrimaryGeneratedColumn()
-  gid: number;
-  @Column()
-  type: string;
-  @Column('float', { array: true })
-  coordinates: number[][];
-  track: Track;
-  form: Form;
 }
