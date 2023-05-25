@@ -9,8 +9,13 @@ export class UsersService {
   constructor(
     @InjectRepository(Users)
     private readonly usersRepository: Repository<Users>,
-  ) {}
-  //agregar usuario  
+    ) {}
+    //buscar todos los usuarios
+    async findAll(): Promise<any> {
+      const users = await this.usersRepository.find();
+      return users;
+    }
+    //agregar usuario  
   async addUser(user: Users): Promise<Users> {
     return this.usersRepository.save(user);
   }
@@ -41,10 +46,5 @@ export class UsersService {
         return Error((error as TypeORMError).message);
       });
     }
-  }
-  //buscar todos los usuarios
-  async findAll(): Promise<any> {
-    const users = await this.usersRepository.find();
-    return users;
   }
 }

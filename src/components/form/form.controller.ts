@@ -7,14 +7,10 @@ export class FormController {
   constructor(private readonly formService: FormService) {}
 
   @Get()
-  async findAll(): Promise<Form[]> {
+  async findAll(){
     return this.formService.findAll();
   }
-
-  @Get(':form_id')
-  async findOne(@Param('form_id') id: number): Promise<Form> {
-    return this.formService.findOne(id);
-  }
+  
 
   
 }

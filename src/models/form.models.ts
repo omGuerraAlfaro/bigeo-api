@@ -1,12 +1,14 @@
 import {
   Column,
   Entity,
+  EntityRepository,
   JoinColumn,
   //ManyToOne,
   //OneToMany,
   OneToOne,
   //PrimaryColumn,
   PrimaryGeneratedColumn,
+  Repository,
 } from 'typeorm';
 import { Geometry } from './geometry.models';
 
@@ -25,6 +27,8 @@ export class Form {
   @JoinColumn()
   geometry: Geometry[];
 }
+@EntityRepository(Form)
+export class FormRepository extends Repository<Form> {}
 
 @Entity({ name: 'properties' })
 export class Properties {

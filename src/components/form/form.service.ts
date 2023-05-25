@@ -9,26 +9,13 @@ export class FormService {
     @InjectRepository(Form)
     private readonly formRepository: Repository<Form>,
   ) {}
-
-  async findAll(): Promise<Form[]> {
-    return this.formRepository.find();
+  //buscar todos los formularios
+  async addForm(form: Form): Promise<Form> {
+    return this.formRepository.save(form);
   }
 
-  async findOne(form_id: number): Promise<any> {
-    try {
-      const form = await this.formRepository.findOne({
-        where: { form_id },
-        relations: {geometry: true, properties: {formCompaction : true, formCount : true, formDamage : true, formFauna : true, formHumidity : true, formSprinkler : true}}}
-      );
-      if (!form) {
-        throw new NotFoundException(`Form with ID ${form_id} not found`);
-      }
-      return {
-        form,
-      };
-    } catch (error) {
-      throw new Error(error);
-    }
-  }  
-
+  async findAll(): Promise<Form[]> {
+    const forms = await this.formRepository.find();
+    return forms;
+  }
 }
