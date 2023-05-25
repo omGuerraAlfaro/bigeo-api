@@ -7,10 +7,12 @@ import { entities }  from './models';
 
 //components
 import { FormModule, UsersModule } from './components'
+import { AuthModule } from './components/Auth/auth.module';
 
 
 @Module({
   imports: [
+    AuthModule,
     UsersModule,
     FormModule,
     TypeOrmModule.forRoot({
