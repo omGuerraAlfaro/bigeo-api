@@ -6,15 +6,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { entities }  from './models';
 
 //components
-import { FormModule, UsersModule } from './components'
-import { AuthModule } from './components/Auth/auth.module';
+import { FormModule, UsersModule, AuthModule } from './components'
 
 
 @Module({
   imports: [
-    AuthModule,
-    UsersModule,
     FormModule,
+    UsersModule,
+    AuthModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: '18.116.150.135',

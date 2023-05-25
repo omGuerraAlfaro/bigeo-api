@@ -13,15 +13,16 @@ export class AuthService {
     constructor(
         @InjectRepository(Users)
         private readonly userRepository: Repository<Users>,
-        private jwtService: JwtService
+        private jwtService: JwtService,
     ) { }
+
 
     async register(userObject: RegisterDto) {
         const { username, password } = userObject;
         const plaintToHash = await hash(password, 10);
         userObject = { ...userObject, password: plaintToHash };
         const userExist = await this.userRepository.findOne({
-            where: { username: userObject.username },
+            where: { username },
         });
         if (!userExist) {
             await this.userRepository.save(userObject);

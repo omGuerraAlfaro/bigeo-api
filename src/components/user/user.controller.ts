@@ -20,7 +20,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
   
   //Obtener todos los usuarios
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get()
   async getUsers() {
     return this.usersService.findAll();
