@@ -1,16 +1,14 @@
+import { Geometry } from 'src/models/geometry.model';
 import {
   Column,
   Entity,
-  EntityRepository,
   JoinColumn,
   //ManyToOne,
   //OneToMany,
   OneToOne,
   //PrimaryColumn,
   PrimaryGeneratedColumn,
-  Repository,
 } from 'typeorm';
-import { Geometry } from './geometry.models';
 
 @Entity({ name: 'form' })
 export class Form {
@@ -27,8 +25,6 @@ export class Form {
   @JoinColumn()
   geometry: Geometry[];
 }
-@EntityRepository(Form)
-export class FormRepository extends Repository<Form> {}
 
 @Entity({ name: 'properties' })
 export class Properties {
@@ -88,6 +84,7 @@ export class FormSprinkler {
   @Column({ nullable: true })
   observation: string;
 }
+
 @Entity({ name: 'formDamage' })
 export class FormDamage {
   @PrimaryGeneratedColumn()
@@ -97,6 +94,7 @@ export class FormDamage {
   @Column({ nullable: true })
   observation: string;
 }
+
 @Entity({ name: 'formHumidity' })
 export class FormHumidity {
   @PrimaryGeneratedColumn()

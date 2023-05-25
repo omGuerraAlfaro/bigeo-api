@@ -2,14 +2,10 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Users } from './models/user.model';
-import {
-  Form, FormCompaction, FormCount, FormDamage,
-  FormDiseases, FormFauna, FormGirdling, FormHumidity,
-  FormPlague, FormSprinkler, Properties
-} from './models/form.models';
-import { Geometry } from './models/geometry.models';
-import { Track } from './models/track.models';
+//models
+import { entities }  from './models';
+
+//components
 import { FormModule, UsersModule } from './components'
 
 
@@ -24,9 +20,7 @@ import { FormModule, UsersModule } from './components'
       username: 'duoc2023team1',
       password: 'duoc2023',
       database: 'Aplicacion',
-      entities: [Users, Form, FormSprinkler, FormDamage, FormHumidity,
-        FormCompaction, FormFauna, FormCount, FormDiseases, FormGirdling,
-        FormPlague, Geometry, Track, Properties],
+      entities,
     }),
   ],
   controllers: [AppController],
