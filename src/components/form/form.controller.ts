@@ -7,7 +7,7 @@ import { JwtAuthGuard } from '../Auth/jwt-auth.guard';
 export class FormController {
   constructor(private readonly formService: FormService) {}
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get()
   async findAll(){
     return this.formService.findAll();
