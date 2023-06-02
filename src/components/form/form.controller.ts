@@ -18,10 +18,6 @@ export class FormController {
     return this.formService.addForm(form);
   }
 
-  @Get(':date')
-  async findByDate(@Param('date') date: string): Promise<Form[]> {
-    const searchDate = new Date(date);
-    return this.formService.findByDate(searchDate);
-  }
+  
 
 }

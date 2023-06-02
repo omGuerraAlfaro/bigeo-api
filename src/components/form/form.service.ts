@@ -8,8 +8,6 @@ export class FormService {
   constructor(
     @InjectRepository(Form)
     private readonly formRepository: Repository<Form>,
-    @InjectRepository(Properties)
-    private readonly propertiesRepository: Repository<Properties>
   ) {}
   
   
@@ -23,10 +21,5 @@ export class FormService {
     return forms;
   }
 
-  async findByDate(date: Date): Promise<Form[]> {
-    return this.formRepository.createQueryBuilder('form')
-      .leftJoinAndSelect('form.properties', 'properties')
-      .where('form.dateTime = :date', { date })
-      .getMany();
-  }
+  
 }
