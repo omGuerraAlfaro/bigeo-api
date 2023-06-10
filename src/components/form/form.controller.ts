@@ -1,23 +1,48 @@
-import { Controller, Get, Param, Post, Body, Put, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Put, Delete } from '@nestjs/common';
 import { FormService } from './form.service';
 import { Form } from '../../models/form.model';
-import { JwtAuthGuard } from '../Auth/jwt-auth.guard';
 
 @Controller('forms')
 export class FormController {
   constructor(private readonly formService: FormService) {}
 
-  // @UseGuards(JwtAuthGuard)
+  @Post()
+  create(@Body() form: Form) {
+    return this.formService.create(form);
+  }
+
   @Get()
-  async findAll(){
+  findAll() {
     return this.formService.findAll();
   }
 
-  @Post()
-  async addForm(@Body() form: Form): Promise<Form> {
-    return this.formService.addForm(form);
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.formService.findOne(+id);
   }
 
-  
+  @Put(':id')
+  update(@Param('id') id: string, @Body() form: Form) {
+    return this.formService.update(+id, form);
+  }
 
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.formService.remove(+id);
+  }
+
+  @Get('user/:userId')
+  async findByUserId(@Param('userId') userId: string){
+    return this.formService.findByUserId(userId);
+  }
+
+  @Get('date/:date')
+  async findByDate(@Param('date') date: Date){
+    return this.formService.findByDate(date);
+  }
+
+  @Get('type/:type')
+  async findByFormType(@Param('type') type: string){
+    return this.formService.findByFormType(type);
+  }
 }
