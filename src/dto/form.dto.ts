@@ -1,4 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { IsOptional, IsString } from 'class-validator';
+
 
 class GeometryDto {
     @ApiProperty()
@@ -64,4 +66,14 @@ export class FormDto {
 
     @ApiProperty({ type: GeometryDto })
     geometry: GeometryDto;
+}
+
+export class GetTracksFilterDto {
+    @IsOptional()
+    @IsString()
+    type?: string;
+
+    @IsOptional()
+    @IsString()
+    userId?: string;
 }

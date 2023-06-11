@@ -8,7 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { entities }  from './models';
 
 // components
-import { FormModule, UsersModule, AuthModule } from './components';
+import { FormModule, UsersModule, AuthModule, TrackModule } from './components';
 
 
 @Module({
@@ -17,6 +17,7 @@ import { FormModule, UsersModule, AuthModule } from './components';
     FormModule,
     UsersModule,
     AuthModule,
+    TrackModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,

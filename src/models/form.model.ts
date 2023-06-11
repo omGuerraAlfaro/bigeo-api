@@ -1,4 +1,4 @@
-import { Geometry } from 'src/models/geometry.model';
+import { Geometry } from 'src/models/track.model';
 import {
   Column,
   Entity,
