@@ -19,12 +19,7 @@ export class FormController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.formService.findOne(+id);
-  }
-
-  @Put(':id')
-  update(@Param('id') id: string, @Body() form: Form) {
-    return this.formService.update(+id, form);
-  }
+  }  
 
   @Delete(':id')
   remove(@Param('id') id: string) {
@@ -37,8 +32,8 @@ export class FormController {
   }
 
   @Get('date/:date')
-  async findByDate(@Param('date') date: Date){
-    return this.formService.findByDate(date);
+  async findByDate(@Param('date') dateTime: Date){
+    return this.formService.findByDate(dateTime);
   }
 
   @Get('type/:type')

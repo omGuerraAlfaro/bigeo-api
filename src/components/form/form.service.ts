@@ -24,48 +24,30 @@ export class FormService {
   async findOne(id: number): Promise<Form> {
     return this.formRepository.findOne({ where: { form_id: id } });
   }
-
-  async update(id: number, form: Form): Promise<Form> {
-    await this.formRepository.update(id, form);
-    return this.formRepository.findOne({ where: { form_id: id } });
-  }
-
+  
   async remove(id: number): Promise<void> {
     await this.formRepository.delete(id);
   }
 
+  // async update(id: number, form: Form): Promise<Form> {
+  //   await this.formRepository.update(id, form);
+  //   return this.formRepository.findOne({ where: { form_id: id } });
+  // }
+
+  //Filtros
   async findByUserId(userId: string): Promise<Form[]> {
-    const properties = await this.propertiesRepository.find({ where: { userId: userId } });
-
-    const forms = [];
-    for (let prop of properties) {
-      const form = await this.formRepository.findOne({ where: { properties: prop } });
-      if (form) {
-        forms.push(form);
-      }
-    }
-
-    return forms;
+    const form = await this.formRepository.find({ where: { properties: { userId } }, relations: ['properties'] });    
+    return form;
   }
 
-  async findByDate(date: Date): Promise<Form[]> {
-    const dateString = date.toISOString();
-    const properties = await this.propertiesRepository.createQueryBuilder('properties')
-        .where('properties.dateTime = :dateString', { dateString })
-        .getMany();
-
-    const forms = [];
-    for (let prop of properties) {
-      const form = await this.formRepository.findOne({ where: { properties: prop } });
-      if (form) {
-        forms.push(form);
-      }
-    }
-
-    return forms;
+  async findByDate(dateTime: Date): Promise<Form[]> {
+    const form = await this.formRepository.find({ where: { properties: { dateTime } }, relations: ['properties'] });
+    return form;
   }
 
+
+  //typeForms
   async findByFormType(type: string): Promise<Form[]> {
-    return this.formRepository.find({ where: { type: type } });
+    return void 0;
   }
 }
