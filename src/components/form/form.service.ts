@@ -29,23 +29,26 @@ export class FormService {
     await this.formRepository.delete(id);
   }
 
-  // async update(id: number, form: Form): Promise<Form> {
-  //   await this.formRepository.update(id, form);
-  //   return this.formRepository.findOne({ where: { form_id: id } });
-  // }
-
-  //Filtros
+  //Filters --------------
+  //For User
   async findByUserId(userId: string): Promise<Form[]> {
     const form = await this.formRepository.find({ where: { properties: { userId } }, relations: ['properties'] });
     return form;
   }
 
-  async findByDate(dateTime: Date): Promise<Form[]> {
-    const form = await this.formRepository.find({ where: { properties: { dateTime } }, relations: ['properties'] });
-    return form;
-  }
+  //For Date
+  // async findByDate(dateTime: Date): Promise<Form[]> {
+  //   const form = await this.formRepository.createQueryBuilder("form")
+  //     .leftJoinAndSelect("form.properties", "properties")
+  //     .where("properties.dateTime = :dateTime", { dateTime })
+  //     .orderBy("properties.dateTime", "DESC")
+  //     .getMany();
 
-  //typeForms
+  //   return form;
+  // }
+
+
+  //For typeForms
   async findByFormType(type: string): Promise<Form[]> {
     const forms = await this.formRepository.find({ relations: ['properties'] });
     return forms.filter(form => form.properties[type] !== null);
@@ -67,5 +70,5 @@ export class FormService {
   }
 
 
-  
+
 }

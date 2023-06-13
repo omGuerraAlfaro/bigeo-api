@@ -1,6 +1,8 @@
 import { Controller, Get, Param, Post, Body, Put, Delete } from '@nestjs/common';
 import { FormService } from './form.service';
 import { Form } from '../../models/form.model';
+import { ParseDatePipe } from '../../pipes/transformDate.pipe';
+
 
 @Controller('forms')
 export class FormController {
@@ -31,10 +33,10 @@ export class FormController {
     return this.formService.findByUserId(userId);
   }
 
-  @Get('date/:date')
-  async findByDate(@Param('date') dateTime: Date) {
-    return this.formService.findByDate(dateTime);
-  }
+  // @Get('date/:date')
+  // async findByDate(@Param('date', new ParseDatePipe()) date: Date) {
+  //   return this.formService.findByDate(date);
+  // }
 
   @Get('type/:type')
   async findByFormType2(@Param('type') type: string) {
