@@ -4,7 +4,7 @@ import { Form } from '../../models/form.model';
 
 @Controller('forms')
 export class FormController {
-  constructor(private readonly formService: FormService) {}
+  constructor(private readonly formService: FormService) { }
 
   @Post()
   create(@Body() form: Form) {
@@ -19,7 +19,7 @@ export class FormController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.formService.findOne(+id);
-  }  
+  }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
@@ -27,17 +27,17 @@ export class FormController {
   }
 
   @Get('user/:userId')
-  async findByUserId(@Param('userId') userId: string){
+  async findByUserId(@Param('userId') userId: string) {
     return this.formService.findByUserId(userId);
   }
 
   @Get('date/:date')
-  async findByDate(@Param('date') dateTime: Date){
+  async findByDate(@Param('date') dateTime: Date) {
     return this.formService.findByDate(dateTime);
   }
 
   @Get('type/:type')
-  async findByFormType(@Param('type') type: string){
+  async findByFormType2(@Param('type') type: string) {
     return this.formService.findByFormType(type);
   }
 }
