@@ -33,10 +33,12 @@ export class FormController {
     return this.formService.findByUserId(userId);
   }
 
-  // @Get('date/:date')
-  // async findByDate(@Param('date', new ParseDatePipe()) date: Date) {
-  //   return this.formService.findByDate(date);
-  // }
+
+  //localhost:3400/forms/date/2023-01-17
+  @Get('date/:date')
+  async findByDate(@Param('date', new ParseDatePipe()) date: Date) {
+    return this.formService.findByDate(date);
+  }
 
   @Get('type/:type')
   async findByFormType2(@Param('type') type: string) {

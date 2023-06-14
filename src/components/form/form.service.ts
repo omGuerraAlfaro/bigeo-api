@@ -37,16 +37,30 @@ export class FormService {
   }
 
   //For Date
-  // async findByDate(dateTime: Date): Promise<Form[]> {
-  //   const form = await this.formRepository.createQueryBuilder("form")
-  //     .leftJoinAndSelect("form.properties", "properties")
-  //     .where("properties.dateTime = :dateTime", { dateTime })
-  //     .orderBy("properties.dateTime", "DESC")
-  //     .getMany();
-
-  //   return form;
-  // }
-
+  async findByDate(date: Date): Promise<Form[]> {
+    const startOfDay = new Date(date.setUTCHours(0, 0, 0, 0));
+    const endOfDay = new Date(date.setUTCHours(23, 59, 59, 999));
+  
+    const forms = await this.formRepository
+      .createQueryBuilder('form')
+      .leftJoinAndSelect('form.properties', 'properties')
+      .leftJoinAndSelect('properties.formSprinkler', 'formSprinkler')
+      .leftJoinAndSelect('properties.formDamage', 'formDamage')
+      .leftJoinAndSelect('properties.formHumidity', 'formHumidity')
+      .leftJoinAndSelect('properties.formCompaction', 'formCompaction')
+      .leftJoinAndSelect('properties.formFauna', 'formFauna')
+      .leftJoinAndSelect('properties.formCount', 'formCount')
+      .leftJoinAndSelect('properties.formDiseases', 'formDiseases')
+      .leftJoinAndSelect('properties.formGirdling', 'formGirdling')
+      .leftJoinAndSelect('properties.formPlague', 'formPlague')
+      .leftJoinAndSelect('form.geometry', 'geometry')
+      .where('properties.dateTime BETWEEN :startOfDay AND :endOfDay', { startOfDay, endOfDay })
+      .getMany();
+  
+    return forms;
+  }
+  
+  
 
   //For typeForms
   async findByFormType(type: string): Promise<Form[]> {
@@ -65,7 +79,6 @@ export class FormService {
         const formType = formTypes.find(type => form.properties[type] !== null);
         return { ...form, formType };
       });
-
     return forms;
   }
 

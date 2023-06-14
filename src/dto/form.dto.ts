@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, IsString } from 'class-validator';
+import { IsDateString, IsOptional, IsString } from 'class-validator';
 
 
 class GeometryDto {
@@ -76,4 +76,8 @@ export class GetTracksFilterDto {
     @IsOptional()
     @IsString()
     userId?: string;
+
+    @IsOptional()
+    @IsDateString()
+    date?: string;
 }
