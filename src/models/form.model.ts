@@ -18,7 +18,7 @@ export class Form {
   type: string;
   @Column({ nullable: true })
   image: string;
-  @OneToOne(() => Properties, { cascade: true, eager: true })
+  @OneToOne(() => Properties, { cascade: true, eager: true, lazy: true })
   @JoinColumn()
   properties: Properties[];
   @OneToOne(() => Geometry, { cascade: true, eager: true })
