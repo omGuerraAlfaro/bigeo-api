@@ -42,10 +42,6 @@ export class FormController {
 
   @Get('type/:type')
   async findByFormType(@Param('type') formType: string) {
-    try {
-      return await this.formService.findByFormType(formType);
-    } catch (e) {
-      // Aquí puedes manejar el error como prefieras
-    }
+    return await this.formService.findByFormType(formType);
   }
 }
