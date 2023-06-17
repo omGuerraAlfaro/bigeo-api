@@ -1,4 +1,6 @@
 import { Geometry } from 'src/models/track.model';
+import { Task } from './task.model';
+
 import {
   Column,
   Entity,
@@ -24,6 +26,9 @@ export class Form {
   @OneToOne(() => Geometry, { cascade: true, eager: true })
   @JoinColumn()
   geometry: Geometry[];
+  // @OneToOne(() => Task, { cascade: true, eager: true })
+  // @JoinColumn()
+  // task: Task[];
 }
 
 @Entity({ name: 'properties' })
