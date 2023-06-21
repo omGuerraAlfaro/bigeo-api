@@ -11,9 +11,11 @@ export class TaskService {
   ) { }
 
   async create(task: Task): Promise<Task> {
+    task.dateTime = task.dateTime || new Date(); // Asignar la fecha/hora actual si no se proporcionó ninguna
     const newTask = this.taskRepository.create(task);
     return this.taskRepository.save(newTask);
-  }
+}
+
 
   async findAll(): Promise<Task[]> {
     return this.taskRepository.find();
