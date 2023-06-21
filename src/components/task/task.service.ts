@@ -22,7 +22,7 @@ export class TaskService {
   async findOne(id: number): Promise<Task> {
     return this.taskRepository.findOne({ where: { task_id: id } });
   }
-  
+
   async remove(id: number): Promise<void> {
     await this.taskRepository.delete(id);
   }
@@ -31,6 +31,19 @@ export class TaskService {
   async updateStatus(id: number, status: string): Promise<void> {
     await this.taskRepository.update(id, { status });
   }
-  
+
+
+  async countTaskWithCondition(status: string): Promise<number> {
+    return await this.taskRepository
+      .createQueryBuilder('task')
+      .where('task.status = :status', { status })
+      .getCount();
+  }
+
+  async countTask(): Promise<number> {
+    return await this.taskRepository
+      .createQueryBuilder('task')
+      .getCount();
+  }
 
 }

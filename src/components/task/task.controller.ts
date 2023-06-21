@@ -34,5 +34,17 @@ export class TaskController {
     return this.taskService.updateStatus(+id, status);
   }
 
+  //count task with condition
+  @Get('count/:status')
+  countTaskWithCondition(@Param('status') status: string) {
+    return this.taskService.countTaskWithCondition(status);
+  }
+
+  //count task
+  @Get('count')
+  countTask() {
+    return this.taskService.countTask();
+  }
+  
 
 }
