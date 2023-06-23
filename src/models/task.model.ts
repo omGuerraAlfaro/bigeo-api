@@ -17,6 +17,9 @@ export class Task {
   @Column({ type: 'timestamp' })
   dateTime: Date;
 
+  @Column({ type: 'timestamp' })
+  dateTimeLimit: Date;
+
   @Column({ nullable: true })
   status: string;
 
@@ -28,4 +31,7 @@ export class Task {
 
   @Column({ nullable: true })
   observation: string;
+
+  @Column({ nullable: true })
+  priority: string;
 }
