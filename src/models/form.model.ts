@@ -26,9 +26,10 @@ export class Form {
   @OneToOne(() => Geometry, { cascade: true, eager: true })
   @JoinColumn()
   geometry: Geometry[];
-  // @OneToOne(() => Task, { cascade: true, eager: true })
-  // @JoinColumn()
-  // task: Task[];
+  //aquí
+  @OneToOne(() => Task, { cascade: true, eager: true })
+  @JoinColumn({ name: 'task_id' })
+  task: Task;
 }
 
 @Entity({ name: 'properties' })

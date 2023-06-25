@@ -8,7 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { entities }  from './models';
 
 // components
-import { FormModule, UsersModule, AuthModule, TrackModule, TaskModule } from './components';
+import { FormModule, UsersModule, AuthModule, TaskModule } from './components';
 
 
 @Module({
@@ -17,7 +17,6 @@ import { FormModule, UsersModule, AuthModule, TrackModule, TaskModule } from './
     FormModule,
     UsersModule,
     AuthModule,
-    TrackModule,
     TaskModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -28,8 +27,8 @@ import { FormModule, UsersModule, AuthModule, TrackModule, TaskModule } from './
       database: process.env.DB_NAME,
       entities,
       extra: {
-        connectionLimit: 5, // Set the number of connections to be made simultaneously. Adjust based on your application's requirements.
-        connectTimeout: 60000, // Set the time, in milliseconds, before a connection attempt is aborted.
+        connectionLimit: 5, 
+        connectTimeout: 60000,
       },
     }),
   ],

@@ -18,6 +18,11 @@ export class FormController {
     return this.formService.findAll();
   }
 
+  @Get('task')
+  findAllFormWithTask() {
+    return this.formService.findAllFormWithTask();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.formService.findOne(+id);

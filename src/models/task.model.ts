@@ -27,7 +27,7 @@ export class Task {
   assigned_user: string;
 
   @Column({ array: true })
-  assigned_form: string;
+  assigned_form: number;
 
   @Column({ nullable: true })
   observation: string;
