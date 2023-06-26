@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import * as moment from 'moment-timezone';
 import { Form } from '../../models/form.model';
 
 @Injectable()
@@ -71,16 +72,39 @@ export class FormService {
   //ok
   //For User
   async findByUserId(userId: string): Promise<Form[]> {
-    const form = await this.formRepository.find({ where: { properties: { userId } }, relations: ['properties'] });
-    return form;
+    const forms = await this.formRepository
+      .createQueryBuilder('form')
+      .leftJoinAndSelect('form.properties', 'properties')
+      .leftJoinAndSelect('properties.formSprinkler', 'formSprinkler')
+      .leftJoinAndSelect('properties.formDamage', 'formDamage')
+      .leftJoinAndSelect('properties.formHumidity', 'formHumidity')
+      .leftJoinAndSelect('properties.formCompaction', 'formCompaction')
+      .leftJoinAndSelect('properties.formFauna', 'formFauna')
+      .leftJoinAndSelect('properties.formCount', 'formCount')
+      .leftJoinAndSelect('properties.formDiseases', 'formDiseases')
+      .leftJoinAndSelect('properties.formGirdling', 'formGirdling')
+      .leftJoinAndSelect('properties.formPlague', 'formPlague')
+      .leftJoinAndSelect('form.geometry', 'geometry')
+      .where('properties.userId = :userId', { userId })
+      .take(1000)
+      .getMany();
+
+    return forms;
   }
+
 
 
   //ok
   //For Date
   async findByDate(date: Date): Promise<Form[]> {
-    const startOfDay = new Date(date.setUTCHours(0, 0, 0, 0));
-    const endOfDay = new Date(date.setUTCHours(23, 59, 59, 999));
+    // Usar 'America/Santiago' para la zona horaria de Chile
+    const timezone = 'America/Santiago';
+
+    // Convertir la fecha dada a la zona horaria correcta
+    const dateInCorrectTimezone = moment(date).tz(timezone);
+
+    const startOfDay = dateInCorrectTimezone.startOf('day').toDate();
+    const endOfDay = dateInCorrectTimezone.endOf('day').toDate();
 
     const forms = await this.formRepository
       .createQueryBuilder('form')
@@ -116,7 +140,9 @@ export class FormService {
       .leftJoinAndSelect('form.properties', 'properties')
       .leftJoinAndSelect(`properties.${formType}`, formType)
       .leftJoinAndSelect('form.geometry', 'geometry')
+      .leftJoinAndSelect('form.task', 'task')
       .where(`properties.${formType} IS NOT NULL`)
+      .take(1000)
       .getMany();
 
     return forms;
