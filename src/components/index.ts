@@ -1,6 +1,6 @@
-import { FormModule } from "./Form/form.module";
-import { UsersModule } from "./User/user.module";
+import { FormModule } from "./form/form.module";
+import { UsersModule } from "./user/user.module";
 import { AuthModule } from "./Auth/auth.module";
-import { TaskModule } from "./Task/task.module";
+import { TaskModule } from "./task/task.module";
 
 export { FormModule, UsersModule, TaskModule, AuthModule };
