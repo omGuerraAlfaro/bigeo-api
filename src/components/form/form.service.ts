@@ -33,7 +33,7 @@ export class FormService {
       .leftJoinAndSelect('properties.formPlague', 'formPlague')
       .leftJoinAndSelect('form.geometry', 'geometry')
       .orderBy('properties.dateTime', 'DESC')
-      .take(2001)
+      .take(2000)
       .getMany();
   }
 
